@@ -1,5 +1,6 @@
 (ns advent-of-code.2020.day-01
-  (:require [clojure.java.io :as io]))
+  (:require [clojure.java.io :as io]
+            [clojure.string :as s]))
 
 (def input
   (line-seq (io/reader (io/resource "2020/day_01"))))
