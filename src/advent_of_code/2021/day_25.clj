@@ -1,11 +1,11 @@
-(ns advent-of-code.2021.day-06
+(ns advent-of-code.2021.day-25
   (:require [clojure.java.io :as io]
             [clojure.string :as s]
             [clojure.set :as cset]
             [advent-of-code.util :as u]))
 
 (def input
-  (line-seq (io/reader (io/resource "2021/day_016"))))
+  (line-seq (io/reader (io/resource "2021/day_25"))))
 
 (defn part-1
   []
