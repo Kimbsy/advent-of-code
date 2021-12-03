@@ -9,3 +9,11 @@
 (defn prime?
   [n]
   (= [1 n] (divisors n)))
+
+(defn transpose
+  [m]
+  (apply map list m))
+
+(defn char->int
+  [c]
+  (Character/digit c 10))
