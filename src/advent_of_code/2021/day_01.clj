@@ -31,3 +31,6 @@
   (part-1) ;; => 1233
   (part-2) ;; => 1275
   ,)
+
+;; refactoring check
+(= [(part-1) (part-2)] [1233 1275])
