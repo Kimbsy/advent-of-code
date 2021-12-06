@@ -21,7 +21,7 @@
        (sort-by second)))
 
 (defn relative-order
-  [results day star]
+  [day star]
   (let [order (order results day star)
         best (second (first order))]
     (map (fn [[name time]]
