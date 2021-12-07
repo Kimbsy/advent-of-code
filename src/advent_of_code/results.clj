@@ -10,7 +10,7 @@
     (str (time/timespan->hours t) "h " (time/timespan->minutes t) "m " (time/timespan->seconds t) "s")))
 
 (defn order
-  [results day star]
+  [day star]
   (->> (get results "members")
        (map second)
        (filter (fn [m]
@@ -22,7 +22,7 @@
 
 (defn relative-order
   [day star]
-  (let [order (order results day star)
+  (let [order (order day star)
         best (second (first order))]
     (map (fn [[name time]]
            [name (readable-time (- time best))])
