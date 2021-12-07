@@ -11,12 +11,13 @@
 
 (defn part-1
   []
-  (let [low (apply min input)
-        high (apply max input)]
-    (first (sort (map (fn [t]
-                        (reduce + (map #(u/abs (- % t))
-                                       input)))
-                      (range low (inc high)))))))
+  (->> (range (apply min input) (inc (apply max input)))
+       (map (fn [t]
+              (transduce (map #(u/abs (- % t)))
+                         +
+                         input)))
+       sort
+       first))
 
 (def cost
   (memoize
@@ -27,14 +28,15 @@
 
 (defn part-2
   []
-  (let [low (apply min input)
-        high (apply max input)]
-    (first (sort (map (fn [t]
-                        (reduce + (map
-                                   (fn [c]
-                                     (cost 0 (u/abs (- c t))))
-                                   input)))
-                      (range low (inc high))))))  )
+  (->> (range (apply min input) (inc (apply max input)))
+       (map (fn [t]
+              (transduce (map
+                          (fn [c]
+                            (cost 0 (u/abs (- c t)))))
+                         +
+                         input)))
+       sort
+       first))
 
 (comment
   (part-1) ;; => 344605
