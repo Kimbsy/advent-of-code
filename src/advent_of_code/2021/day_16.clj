@@ -19,3 +19,6 @@
   (part-1) ;; =>
   (part-2) ;; =>
   ,)
+
+;; refactoring check
+(= [(part-1) (part-2)] [])

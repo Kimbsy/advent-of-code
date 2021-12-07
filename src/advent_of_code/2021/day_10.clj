@@ -5,8 +5,7 @@
             [advent-of-code.util :as u]))
 
 (def input
-  (line-seq (io/reader (io/resource "2021/day_10
-"))))
+  (line-seq (io/reader (io/resource "2021/day_10"))))
 
 (defn part-1
   []
@@ -20,3 +19,6 @@
   (part-1) ;; =>
   (part-2) ;; =>
   ,)
+
+;; refactoring check
+(= [(part-1) (part-2)] [])
