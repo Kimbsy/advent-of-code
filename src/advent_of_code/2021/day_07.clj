@@ -24,8 +24,10 @@
 
 (def cost
   (memoize
-   (fn [c t]
-     (reduce + (map inc (range (abs (- c t))))))))
+   (fn [total v]
+     (if (zero? v)
+       total
+       (recur (+ total v) (dec v))))))
 
 (defn part-2
   []
@@ -34,7 +36,7 @@
     (first (sort (map (fn [t]
                         (reduce + (map
                                    (fn [c]
-                                     (cost c t))
+                                     (cost 0 (abs (- c t))))
                                    input)))
                       (range low (inc high))))))  )
 
