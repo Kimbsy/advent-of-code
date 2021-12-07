@@ -9,16 +9,12 @@
 
 (def test-input [16 1 2 0 4 2 7 1 2 14])
 
-(defn abs
-  [n]
-  (max n (- n)))
-
 (defn part-1
   []
   (let [low (apply min input)
         high (apply max input)]
     (first (sort (map (fn [t]
-                        (reduce + (map #(abs (- % t))
+                        (reduce + (map #(u/abs (- % t))
                                        input)))
                       (range low (inc high)))))))
 
@@ -36,7 +32,7 @@
     (first (sort (map (fn [t]
                         (reduce + (map
                                    (fn [c]
-                                     (cost 0 (abs (- c t))))
+                                     (cost 0 (u/abs (- c t))))
                                    input)))
                       (range low (inc high))))))  )
 

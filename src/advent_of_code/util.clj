@@ -17,3 +17,7 @@
 (defn char->int
   [c]
   (Character/digit c 10))
+
+(defn abs
+  [n]
+  (max n (- n)))
