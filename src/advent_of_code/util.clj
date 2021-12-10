@@ -18,6 +18,11 @@
   [n]
   (max n (- n)))
 
+(defn median
+  "The middle value of a sorted sequence"
+  [coll]
+  (nth coll (int (/ (count coll) 2))))
+
 ;;; Multidimensional grid stuff
 
 ;; Note: x and y will be backwards, but it should be fine if we always
