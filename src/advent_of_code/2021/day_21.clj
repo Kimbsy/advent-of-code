@@ -7,13 +7,17 @@
 (def input
   (line-seq (io/reader (io/resource "2021/day_21"))))
 
+(def test-input (s/split-lines ""))
+
 (defn part-1
   []
-  )
+  (let [in test-input]
+    ))
 
 (defn part-2
   []
-  )
+  (let [in test-input]
+    ))
 
 (comment
   (part-1) ;; =>
@@ -21,4 +25,4 @@
   ,)
 
 ;; refactoring check
-(= [(part-1) (part-2)] [])
+;; (= [(part-1) (part-2)] [])
