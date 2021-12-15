@@ -7,7 +7,16 @@
 (def input
   (line-seq (io/reader (io/resource "2021/day_05"))))
 
-(def test-input ["0,9 -> 5,9" "8,0 -> 0,8" "9,4 -> 3,4" "2,2 -> 2,1" "7,0 -> 7,4" "6,4 -> 2,0" "0,9 -> 2,9" "3,4 -> 1,4" "0,0 -> 8,8" "5,5 -> 8,2"])
+(def test-input ["0,9 -> 5,9"
+                 "8,0 -> 0,8"
+                 "9,4 -> 3,4"
+                 "2,2 -> 2,1"
+                 "7,0 -> 7,4"
+                 "6,4 -> 2,0"
+                 "0,9 -> 2,9"
+                 "3,4 -> 1,4"
+                 "0,0 -> 8,8"
+                 "5,5 -> 8,2"])
 
 (defn parse-line
   [string]
@@ -77,13 +86,13 @@
 (defn part-1
   []
   (let [in input
-        res (add-lines (create-grid in) (filter cardinal? (lines in)))]
+        res (add-lines (create-grid in) (filter cardinal? (map parse-line in)))]
     (count-overlaps res)))
 
 (defn part-2
   []
   (let [in input
-        res (add-lines (create-grid in) (lines in))]
+        res (add-lines (create-grid in) (map parse-line in))]
     (count-overlaps res)))
 
 (comment

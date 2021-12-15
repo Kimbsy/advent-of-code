@@ -37,7 +37,7 @@
 
 (defn check
   [stack cs]
-  (let [expected (get match (peek stack))
+  (let [expected (get pairs (peek stack))
         c (first cs)]
     (cond
       (empty? cs) {:corrupt? false :stack stack}

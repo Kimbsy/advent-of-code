@@ -21,10 +21,6 @@
 ;; Ewwwwwwwwww
 (def ^:dynamic *counter* (atom 0))
 
-(defn prn-grid
-  [grid]
-  (clojure.pprint/pprint (mapv #(mapv :energy %) grid)))
-
 (defn parse-input
   [in]
   (->> in
