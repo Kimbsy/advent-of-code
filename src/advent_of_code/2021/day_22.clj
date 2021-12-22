@@ -350,10 +350,8 @@
    [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
   [[[xl1 xh1] [yl1 yh1] [(inc zh2) zh1]] ; top
    [[xl1 xh1] [yl1 yh1] [zl1 (dec zl2)]] ; bottom
-
    [[xl1 xh1] [yl1 (dec yl2)] [zl2 zh2]] ; front
    [[xl1 xh1] [(inc yh2) yh1] [zl2 zh2]] ; back
-
    [[xl1 (dec xl2)] [yl2 yh2] [zl2 zh2]] ; left
    [[(inc xh2) xh1] [yl2 yh2] [zl2 zh2]] ; right
    ])
@@ -373,22 +371,18 @@
   [[[xl1 xh1] [yl1 yh1] [zl1 zh1]]
    [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
   [[[xl1 xh1] [yl1 yh1] [zl1 (dec zl2)]] ; bottom
-
    [[xl1 xh1] [yl1 (dec yl2)] [zl2 zh1]] ; top-front
    [[xl1 xh1] [(inc yh2) yh1] [zl2 zh1]] ; top-back
-
-   [[xl1 (dec xl2)] [yl2 yh1] [zl2 zh1]] ; top-left
-   [[(inc xh2) xh1] [yl2 yh1] [zl2 zh1]] ; top-right
+   [[xl1 (dec xl2)] [yl2 yh2] [zl2 zh1]] ; top-left
+   [[(inc xh2) xh1] [yl2 yh2] [zl2 zh1]] ; top-right
    ])
 
 (defn subtract-face-bottom
   [[[xl1 xh1] [yl1 yh1] [zl1 zh1]]
    [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
   [[[xl1 xh1] [yl1 yh1] [(inc zh2) zh1]] ; top
-
    [[xl1 xh1] [yl1 (dec yl2)] [zl1 zh2]] ; bottom-front
    [[xl1 xh1] [(inc yh2) yh1] [zl1 zh2]] ; bottom-back
-
    [[xl1 (dec xl2)] [yl2 yh2] [zl1 zh2]] ; bottom-left
    [[(inc xh2) xh1] [yl2 yh2] [zl1 zh2]] ; bottom-right
    ])
@@ -397,10 +391,8 @@
   [[[xl1 xh1] [yl1 yh1] [zl1 zh1]]
    [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
   [[[xl1 xh1] [(inc yh2) yh1] [zl1 zh1]] ; back
-
    [[xl1 xh1] [yl1 yh2] [(inc zh2) zh1]] ; front-top
    [[xl1 xh1] [yl1 yh2] [zl1 (dec zl2)]] ; front-bottom
-
    [[xl1 (dec xl2)] [yl1 yh2] [zl2 zh2]] ; front-left
    [[(inc xh2) xh1] [yl1 yh2] [zl2 zh2]] ; front-right
    ])
@@ -409,23 +401,31 @@
   [[[xl1 xh1] [yl1 yh1] [zl1 zh1]]
    [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
   [[[xl1 xh1] [yl1 (dec yl2)] [zl1 zh1]] ; front
-
-   [[xl1 xh1] [yh2 yh1] [(inc zh2) zh1]] ; back-top
-   [[xl1 xh1] [yh2 yh1] [zl1 (dec zl2)]] ; back-bottom
-
-   [[xl1 (dec xl2)] [yh2 yh1] [zl2 zh2]] ; back-left
-   [[(inc xh2) xh1] [yh2 yh1] [zl2 zh2]] ; back-right
+   [[xl1 xh1] [yl2 yh1] [(inc zh2) zh1]] ; back-top
+   [[xl1 xh1] [yl2 yh1] [zl1 (dec zl2)]] ; back-bottom
+   [[xl1 (dec xl2)] [yl2 yh1] [zl2 zh2]] ; back-left
+   [[(inc xh2) xh1] [yl2 yh1] [zl2 zh2]] ; back-right
    ])
 
-;; (defn subtract-face-left
-;;   [[[xl1 xh1] [yl1 yh1] [zl1 zh1]]
-;;    [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
-;;   )
+(defn subtract-face-left
+  [[[xl1 xh1] [yl1 yh1] [zl1 zh1]]
+   [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
+  [[[(inc xh2) xh1] [yl1 yh1] [zl1 zh1]] ; right
+   [[xl1 xh2] [yl1 yh1] [(inc zh2) zh1]] ; left-top
+   [[xl1 xh2] [yl1 yh1] [zl1 (dec zl2)]] ; left-bottom
+   [[xl1 xh2] [yl1 (dec yl2)] [zl2 zh2]] ; left-front
+   [[xl1 xh2] [(inc yh2) yh1] [zl2 zh2]] ; left-back
+   ])
 
-;; (defn subtract-face-right
-;;   [[[xl1 xh1] [yl1 yh1] [zl1 zh1]]
-;;    [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
-;;   )
+(defn subtract-face-right
+  [[[xl1 xh1] [yl1 yh1] [zl1 zh1]]
+   [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
+  [[[xl1 (dec xl2)] [yl1 yh1] [zl1 zh1]] ; left
+   [[xl2 xh1] [yl1 yh1] [(inc zh2) zh1]] ; right-top
+   [[xl2 xh1] [yl1 yh1] [zl1 (dec zl2)]] ; right-bottom
+   [[xl2 xh1] [yl1 (dec yl2)] [zl2 zh2]] ; right-front
+   [[xl2 xh1] [(inc yh2) yh1] [zl2 zh2]] ; right-back
+   ])
 
 ;; ;; intersects with edge?
 ;; (defn subtract-edge-top-front
@@ -529,6 +529,43 @@
 ;;    [[xl2 xh2] [yl2 yh2] [zl2 zh2]]]
 ;;   )
 
+(def test-c [[1 4] [1 4] [1 4]])
+
+(comment
+  (do
+    (clojure.pprint/pprint (subtract-cube-inside test-c [[2 3] [2 3] [2 3]]))
+    (clojure.pprint/pprint (subtract-cube-encloses test-c [[0 5] [0 5] [0 5]]))
+    (clojure.pprint/pprint (subtract-cube-outside test-c [[6 7] [6 7] [6 7]]))
+
+    (clojure.pprint/pprint (subtract-face-top test-c [[2 3] [2 3] [4 5]]))
+    (clojure.pprint/pprint (subtract-face-bottom test-c [[2 3] [2 3] [0 1]]))
+    (clojure.pprint/pprint (subtract-face-front test-c [[2 3] [0 1] [2 3]]))
+    (clojure.pprint/pprint (subtract-face-back test-c [[2 3] [4 5] [2 3]]))
+    (clojure.pprint/pprint (subtract-face-left test-c [[0 1] [2 3] [2 3]]))
+    (clojure.pprint/pprint (subtract-face-right test-c [[4 5] [2 3] [2 3]]))
+
+    (clojure.pprint/pprint (subtract-edge-top-front test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-top-back test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-top-left test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-top-right test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-bottom-front test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-bottom-back test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-bottom-left test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-bottom-right test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-front-left test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-front-right test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-back-left test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-edge-back-right test-c [[] [] []]))
+
+    (clojure.pprint/pprint (subtract-corner-top-front-left test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-corner-top-front-right test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-corner-top-back-left test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-corner-top-back-right test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-corner-bottom-front-left test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-corner-bottom-front-right test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-corner-bottom-back-left test-c [[] [] []]))
+    (clojure.pprint/pprint (subtract-corner-bottom-back-right test-c [[] [] []]))))
+
 (defn subtract-cube
   [c1 c2]
   (cond
@@ -541,26 +578,27 @@
     (intersects-face-back? c1 c2) (subtract-face-back c1 c2)
     (intersects-face-left? c1 c2) (subtract-face-left c1 c2)
     (intersects-face-right? c1 c2) (subtract-face-right c1 c2)
-    (intersects-edge-top-front? c1 c2) (subtract-edge-top-front c1 c2)
-    (intersects-edge-top-back? c1 c2) (subtract-edge-top-back c1 c2)
-    (intersects-edge-top-left? c1 c2) (subtract-edge-top-left c1 c2)
-    (intersects-edge-top-right? c1 c2) (subtract-edge-top-right c1 c2)
-    (intersects-edge-bottom-front? c1 c2) (subtract-edge-bottom-front c1 c2)
-    (intersects-edge-bottom-back? c1 c2) (subtract-edge-bottom-back c1 c2)
-    (intersects-edge-bottom-left? c1 c2) (subtract-edge-bottom-left c1 c2)
-    (intersects-edge-bottom-right? c1 c2) (subtract-edge-bottom-right c1 c2)
-    (intersects-edge-front-left? c1 c2) (subtract-edge-front-left c1 c2)
-    (intersects-edge-front-right? c1 c2) (subtract-edge-front-right c1 c2)
-    (intersects-edge-back-left? c1 c2) (subtract-edge-back-left c1 c2)
-    (intersects-edge-back-right? c1 c2) (subtract-edge-back-right c1 c2)
-    (intersects-corner-top-front-left? c1 c2) (subtract-corner-top-front-left c1 c2)
-    (intersects-corner-top-front-right? c1 c2) (subtract-corner-top-front-right c1 c2)
-    (intersects-corner-top-back-left? c1 c2) (subtract-corner-top-back-left c1 c2)
-    (intersects-corner-top-back-right? c1 c2) (subtract-corner-top-back-right c1 c2)
-    (intersects-corner-bottom-front-left? c1 c2) (subtract-corner-bottom-front-left c1 c2)
-    (intersects-corner-bottom-front-right? c1 c2) (subtract-corner-bottom-front-right c1 c2)
-    (intersects-corner-bottom-back-left? c1 c2) (subtract-corner-bottom-back-left c1 c2)
-    (intersects-corner-bottom-back-right? c1 c2) (subtract-corner-bottom-back-right c1 c2)))
+    ;; (intersects-edge-top-front? c1 c2) (subtract-edge-top-front c1 c2)
+    ;; (intersects-edge-top-back? c1 c2) (subtract-edge-top-back c1 c2)
+    ;; (intersects-edge-top-left? c1 c2) (subtract-edge-top-left c1 c2)
+    ;; (intersects-edge-top-right? c1 c2) (subtract-edge-top-right c1 c2)
+    ;; (intersects-edge-bottom-front? c1 c2) (subtract-edge-bottom-front c1 c2)
+    ;; (intersects-edge-bottom-back? c1 c2) (subtract-edge-bottom-back c1 c2)
+    ;; (intersects-edge-bottom-left? c1 c2) (subtract-edge-bottom-left c1 c2)
+    ;; (intersects-edge-bottom-right? c1 c2) (subtract-edge-bottom-right c1 c2)
+    ;; (intersects-edge-front-left? c1 c2) (subtract-edge-front-left c1 c2)
+    ;; (intersects-edge-front-right? c1 c2) (subtract-edge-front-right c1 c2)
+    ;; (intersects-edge-back-left? c1 c2) (subtract-edge-back-left c1 c2)
+    ;; (intersects-edge-back-right? c1 c2) (subtract-edge-back-right c1 c2)
+    ;; (intersects-corner-top-front-left? c1 c2) (subtract-corner-top-front-left c1 c2)
+    ;; (intersects-corner-top-front-right? c1 c2) (subtract-corner-top-front-right c1 c2)
+    ;; (intersects-corner-top-back-left? c1 c2) (subtract-corner-top-back-left c1 c2)
+    ;; (intersects-corner-top-back-right? c1 c2) (subtract-corner-top-back-right c1 c2)
+    ;; (intersects-corner-bottom-front-left? c1 c2) (subtract-corner-bottom-front-left c1 c2)
+    ;; (intersects-corner-bottom-front-right? c1 c2) (subtract-corner-bottom-front-right c1 c2)
+    ;; (intersects-corner-bottom-back-left? c1 c2) (subtract-corner-bottom-back-left c1 c2)
+    ;; (intersects-corner-bottom-back-right? c1 c2) (subtract-corner-bottom-back-right c1 c2)
+    ))
 
 (defn turn-off
   [cubes c1]
@@ -574,6 +612,11 @@
   [cubes c]
   (conj (turn-off cubes c) c))
 
+(defn volume
+  [[[xl xh] [yl yh] [zl zh]]]
+  (* (- (inc xh) xl)
+     (- (inc yh) yl)
+     (- (inc zh) zl)))
 
 (defn part-2
   []
@@ -585,11 +628,7 @@
                         []
                         in)]
       (->> cubes
-           (map (fn [c]
-                  (reduce *
-                          (map (fn [[l h]]
-                                 (- (inc  h) l))
-                               c))))
+           (map volume)
            (reduce +)))))
 
 (comment
