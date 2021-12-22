@@ -58,17 +58,6 @@
         z (bounded-inclusive-range zl zh)]
     [x y z]))
 
-(defn inclusive-range
-  [low high]
-  (range low (inc high)))
-
-(defn cubes
-  [[xl xh] [yl yh] [zl zh]]
-  (for [x (inclusive-range xl xh)
-        y (inclusive-range yl yh)
-        z (inclusive-range zl zh)]
-    [x y z]))
-
 (defn in-range?
   [[nl nh]]
   (or (<= nl -50  nh)
@@ -601,11 +590,9 @@
     ))
 
 (defn turn-off
-  [cubes c1]
-  (reduce (fn [resulting-cubes c2]
-            (concat resulting-cubes
-                    (subtract-cube c1 c2)))
-          []
+  [cubes c]
+  (mapcat (fn [existing-cube]
+            (subtract-cube existing-cube c))
           cubes))
 
 (defn turn-on
