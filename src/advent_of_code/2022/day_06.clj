@@ -1,5 +1,6 @@
 (ns advent-of-code.2022.day-06
-  (:require [clojure.java.io :as io]
+  (:require [clojure.data :as d]
+            [clojure.java.io :as io]
             [clojure.string :as s]
             [clojure.set :as cset]
             [advent-of-code.util :as u]))
