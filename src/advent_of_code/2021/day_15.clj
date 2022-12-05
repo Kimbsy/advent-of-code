@@ -54,10 +54,6 @@
       (cond
        (= curr dst)
        (select-keys costs [dst])
-
-       ;; (or (empty? unvisited) (= ##Inf (get costs curr)))
-       ;; costs
-
        :else
        (let [next-costs (update-costs g costs unvisited curr)
              next-node (apply min-key next-costs unvisited)]

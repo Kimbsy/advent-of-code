@@ -42,14 +42,13 @@
   [g n]
   (let [l (map (partial take n) g)
         r (map (partial drop n) g)]
-    (map (partial map +) l (map reverse r)))  )
+    (map (partial map +) l (map reverse r))))
 
 (defn make-vert-fold
   [g n]
   (let [t (take n g)
         b (drop n g)]
-    (map (partial map +) t (reverse b)))
-)
+    (map (partial map +) t (reverse b))))
 
 (defn make-fold
   [g [axis n]]
@@ -81,9 +80,13 @@
                            (assoc-in g p 1))
                          grid
                          dots)]
-      (map (fn [r] (map (fn [d] (if (< 0 d) 1 0)) r))(reduce make-fold
-                                                                 dotted
-                                                                 folds)))))
+      (map (fn [r]
+             (map (fn [d]
+                    (if (< 0 d) 1 0))
+                  r))
+           (reduce make-fold
+                   dotted
+                   folds)))))
 
 (comment
   (part-1) ;; => 647
