@@ -6,26 +6,31 @@
             [advent-of-code.util :as u]))
 
 (def input
-  (line-seq (io/reader (io/resource "2022/day_06"))))
+  (slurp (io/reader (io/resource "2022/day_06"))))
 
-(def test-input [])
+(def test-input "mjqjpqmgbljsphdztnvjfqwrcgsmlb")
 
-(defn parse-input
-  [in]
-  in)
+(defn solve
+  [in n]
+  (->> in
+       (partition n 1)
+       (map-indexed vector)
+       (filter (fn [[i xs]] (= n (count (set xs)))))
+       ffirst
+       (+ n)))
 
 (defn part-1
   []
-  )
+  (solve input 4))
 
 (defn part-2
   []
-  )
+  (solve input 14))
 
 (comment
-  (part-1) ;; =>
-  (part-2) ;; =>
+  (part-1) ;; => 1343
+  (part-2) ;; => 2193
   ,)
 
 ;; refactoring check
-(= [(part-1) (part-2)] [0 0])
+(= [(part-1) (part-2)] [1343 2193])
