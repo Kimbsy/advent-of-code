@@ -1,5 +1,14 @@
 (ns advent-of-code.util)
 
+;; (take-until zero? [2 3 0 5 4]) => (2 3 0)
+(defn take-until
+  [pred col]
+  (lazy-seq
+   (when-let [s (seq col)]
+     (if (pred (first s))
+       (cons (first s) nil)
+       (cons (first s) (take-until pred (rest s)))))))
+
 (defn divisors
   [n]
   (->> (range n)
