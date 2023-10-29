@@ -105,10 +105,6 @@
         others (pop scanners)]
     (recursive-solve (:beacons start) others)))
 
-(defn manhattan-distance
-  [p1 p2]
-  (reduce + (map - p1 p2)))
-
 (defn part-2
   []
   (reset! *offsets* #{})
@@ -116,7 +112,7 @@
         start (peek scanners)
         others (pop scanners)]
     (recursive-solve (:beacons start) others))
-  (apply max (map u/abs (map (partial apply manhattan-distance) (combo/combinations (map (partial map u/abs) (conj @*offsets* [0 0 0])) 2)))))
+  (apply max (map u/abs (map (partial apply u/manhattan-distance) (combo/combinations (map (partial map u/abs) (conj @*offsets* [0 0 0])) 2)))))
 
 (comment
   (part-1) ;; => 342

@@ -80,6 +80,16 @@
           :when (not (and (= x i) (= y j)))]
       [i j])))
 
+(defn unbounded-adjacent-positions
+  "Get the adjacent positions for a position, regardless of grid"
+  [[x y]]
+  (let [xs [(dec x) x (inc x)]
+        ys [(dec y) y (inc y)]]
+    (for [i xs
+          j ys
+          :when (not (and (= x i) (= y j)))]
+      [i j])))
+
 (defn cardinal-adjacent-positions
   "Get the cardinally adjacent positions for a position on a 2D grid
 
@@ -92,3 +102,7 @@
           :when (and (or (= x i) (= y j))
                      (not (and (= x i) (= y j))))]
       [i j])))
+
+(defn manhattan-distance
+  [p1 p2]
+  (reduce + (map - p1 p2)))
