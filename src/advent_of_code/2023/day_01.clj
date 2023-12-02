@@ -54,29 +54,32 @@
    "8"     8
    "9"     9})
 
-(defn replace-words
+(defn fl
+  "Get the first and last 'digits' of a string"
   [s]
-  (reduce (fn [acc [k v]]
-            (s/replace acc k v))
-          s
-          replacements))
+  ;; when just using the forward pattern "4oneight" returns [4 one]
+  ;; instead of [4 eight]
+  (let [forward-pattern "one|two|three|four|five|six|seven|eight|nine"
+        back-pattern (apply str (reverse forward-pattern))
+        r1 (re-pattern (str "\\d|" forward-pattern))
+        r2 (re-pattern (str "\\d|" back-pattern))]
+    [(re-find r1 s)
+     (apply str (reverse (re-find r2 (apply str (reverse s)))))]))
 
-;; @TODO: somehow broken :'(
+
 (defn part-2
   []
   (->> input
-       (map #(re-seq #"\d|one|two|three|four|five|six|seven|eight|nine" %))
+       (map fl)
        (map (fn [digits] (map lookup digits)))
-       (map (juxt first last))
        (map (partial apply str))
        (map read-string)
-       (reduce +)
-       ))
+       (reduce +)))
 
 (comment
   (part-1) ;; => 57346
-  (part-2) ;; => 57325 - wrong
+  (part-2) ;; => 57345
   ,)
 
 ;; refactoring check
-(= [(part-1) (part-2)] [57346 0])
+(= [(part-1) (part-2)] [57346 57345])
