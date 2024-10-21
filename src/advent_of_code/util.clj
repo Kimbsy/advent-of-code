@@ -23,10 +23,6 @@
   [c]
   (Character/digit c 10))
 
-(defn abs
-  [n]
-  (max n (- n)))
-
 (defn median
   "The middle value of a sorted sequence"
   [coll]

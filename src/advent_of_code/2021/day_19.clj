@@ -112,7 +112,7 @@
         start (peek scanners)
         others (pop scanners)]
     (recursive-solve (:beacons start) others))
-  (apply max (map u/abs (map (partial apply u/manhattan-distance) (combo/combinations (map (partial map u/abs) (conj @*offsets* [0 0 0])) 2)))))
+  (apply max (map abs (map (partial apply u/manhattan-distance) (combo/combinations (map (partial map abs) (conj @*offsets* [0 0 0])) 2)))))
 
 (comment
   (part-1) ;; => 342

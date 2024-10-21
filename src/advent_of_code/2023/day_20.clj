@@ -28,4 +28,4 @@
   ,)
 
 ;; refactoring check
-(= [(part-1) (part-2)] [0 0])
+;; (= [(part-1) (part-2)] [0 0])

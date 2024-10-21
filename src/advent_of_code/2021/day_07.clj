@@ -13,7 +13,7 @@
   []
   (->> (range (apply min input) (inc (apply max input)))
        (map (fn [t]
-              (transduce (map #(u/abs (- % t)))
+              (transduce (map #(abs (- % t)))
                          +
                          input)))
        sort
@@ -32,7 +32,7 @@
        (map (fn [t]
               (transduce (map
                           (fn [c]
-                            (cost 0 (u/abs (- c t)))))
+                            (cost 0 (abs (- c t)))))
                          +
                          input)))
        sort
