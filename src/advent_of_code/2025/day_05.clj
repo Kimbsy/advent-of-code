@@ -1,6 +1,7 @@
 (ns advent-of-code.2025.day-05
   (:require [clojure.data :as d]
             [clojure.java.io :as io]
+            [clojure.math.combinatorics :as combo]
             [clojure.string :as s]
             [clojure.set :as cset]
             [advent-of-code.util :as u]))
@@ -50,12 +51,17 @@
             (< l cl ch h))
           rs))
 
+(defn overlapping?
+  [[l1 h1] [l2 h2]]
+  (or (<= l1 l2 h2 h1)
+      (<= l2 l1 h1 h2)
+      (<= l1 l2 h1 h2)
+      (<= l2 l1 h2 h1)))
+
 (defn no-overlap?
-  [rs [cl ch]]
-  (every? (fn [[l h]]
-            (and (not (<= l cl h))
-                 (not (<= l ch h))
-                 (not (<= cl l h ch))))
+  [rs current]
+  (every? (fn [r]
+            (not (overlapping? current r)))
           rs))
 
 (defn remove-wrapped
@@ -63,31 +69,38 @@
   (remove (fn [[l h]] (<= cl l h ch))
           rs))
 
-(defn extend-ranges
-  [rs [cl ch]]
-  (map (fn [[l h]]
-         (cond
-           (<= l cl h ch) [l ch]
-           (<= cl l ch h) [cl h]
-           :else [l h]))
-       rs))
+(defn extend-range
+  [[l1 h1] [l2 h2]]
+  (cond
+    (<= l1 l2 h2 h1) [l1 h1]
+    (<= l2 l1 h1 h2) [l2 h2]
+    (<= l1 l2 h1 h2) [l1 h2]
+    (<= l2 l1 h2 h1) [l2 h1]))
 
-(defn combine-range
-  [rs r]
-  (let [new (remove-wrapped rs r)]
-    (cond
-      (completely-within? new r) new
-      (no-overlap? new r) (conj new r)
-      :else (extend-ranges new r))))
-
+;; @NOTE largest range is 8,662,419,183,882
 (defn part-2
   []
   (let [[range-strings _] (parse-input input)
-        ranges (parse-ranges range-strings)
+        ranges (distinct (parse-ranges range-strings))
+        combined (loop [rs ranges]
+                   (let [pairs (remove (partial apply =) (combo/combinations rs 2))]
+                     (if (every? (partial apply (complement overlapping?)) pairs)
+                       rs
+                       (let [[r1 r2] (first (filter (partial apply overlapping?) pairs))
+                             fine (remove #{r1 r2} rs)]
+                         (recur (conj fine (extend-range r1 r2)))))))]
 
-        combined-ranges (reduce combine-range
-                                (take 1 ranges)
-                                (rest ranges))]
+    (->> combined
+         (map (fn [[l h]] (- (inc h) l)))
+         (apply +))
+
+    ;; ((3 5) (10 14) (16 20) (12 18))
+    ;; ([10 18] (3 5) (10 14) (16 20) (12 18))
+    ;; ([10 18] [10 18] (3 5) (10 14) (16 20) (12 18))
+    ;; ([10 18] [10 18] [10 18] (3 5) (10 14) (16 20) (12 18))
+    ;; ([10 18] [10 18] [10 18] [10 18] (3 5) (10 14) (16 20) (12 18))
+
+    
 
     ;; not quite working
     ;; (combine-range [[5 10] [20 30]] [9 21])
@@ -98,9 +111,9 @@
     ))
 
 (comment
-  (part-1) ;; => 
+  (part-1) ;; => 679
   (part-2) ;; => 
   ,)
 
 ;; refactoring check
-#_(= [(part-1) (part-2)] [])
+#_(= [(part-1) (part-2)] [679 nil])
